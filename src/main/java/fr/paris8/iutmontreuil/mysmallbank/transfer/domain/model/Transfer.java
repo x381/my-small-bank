@@ -10,8 +10,8 @@ public class Transfer {
     private final double amount;
     private final LocalDateTime executionDate;
 
-    public Transfer(String accountIdFrom, String accountIdTo, double amount) {
-        this.id = null;
+    public Transfer(String id, String accountIdFrom, String accountIdTo, double amount) {
+        this.id = id;
         this.accountIdFrom = accountIdFrom;
         this.accountIdTo = accountIdTo;
         this.amount = amount;
@@ -40,6 +40,10 @@ public class Transfer {
 
     public double getAmount() {
         return amount;
+    }
+
+    public LocalDateTime getExecutionDate() {
+        return executionDate;
     }
 
 }

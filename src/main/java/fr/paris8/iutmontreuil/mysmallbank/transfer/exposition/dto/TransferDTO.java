@@ -1,11 +1,16 @@
 package fr.paris8.iutmontreuil.mysmallbank.transfer;
 
+import fr.paris8.iutmontreuil.mysmallbank.account.exposition.dto.AccountDTO;
+
+import java.time.LocalDateTime;
+
 public class TransferDTO {
 
     private String id;
     private String to;
     private String from;
     private double amount;
+    private LocalDateTime executionDate;
 
     public String getId() {
         return id;
@@ -37,5 +42,13 @@ public class TransferDTO {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public LocalDateTime getExecutionDate() {
+        return executionDate;
+    }
+
+    public void setExecutionDate(LocalDateTime executionDate) {
+        this.executionDate = executionDate;
     }
 }
