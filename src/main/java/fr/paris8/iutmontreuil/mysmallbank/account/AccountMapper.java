@@ -12,17 +12,20 @@ import java.util.stream.Collectors;
 
 public class AccountMapper {
 
-    private AccountMapper() { }
+    private AccountMapper() {
+    }
 
     public static Account toAccount(AccountDTO accountDTO) {
         return new Account(accountDTO.getUid(), toHolder(accountDTO.getHolder()), accountDTO.getType(), accountDTO.getBalance());
     }
 
     private static Holder toHolder(HolderDTO holderDTO) {
+        if(holderDTO == null)
+            return null;
         return new Holder(holderDTO.getId(), null, null, null, null, null);
     }
 
-    public static AccountDTO toHolderDTO(Account account) {
+    public static AccountDTO toDTO(Account account) {
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setBalance(account.getBalance());
         accountDTO.setHolder(toHolderDTO(account.getHolder()));
@@ -50,7 +53,6 @@ public class AccountMapper {
         return holderEntity;
     }
 
-
     public static Holder toHolder(HolderEntity holderEntity) {
         return new Holder(holderEntity.getId(), holderEntity.getLastName(), holderEntity.getFirstName(), null, holderEntity.getBirthDate(), null);
     }
@@ -66,25 +68,27 @@ public class AccountMapper {
     }
 
     public static List<AccountDTO> toDTOs(List<Account> accounts) {
-        // Call the toDTO method with a java 8 stream
-        return null;
+        return accounts.stream()
+                .map(AccountMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public static List<Account> toAccounts(List<AccountEntity> accounts) {
-        // Call the toAccount method with a java 8 stream
+//    public static List<Account> toAccounts(List<AccountEntity> accountsEntities) {
+//        return accountsEntities.stream()
+//                .map(AccountMapper::toAccount)
+//                .collect(Collectors.toList());
+//    }
+//
+//    public static List<AccountEntity> toEntities(List<Account> accounts) {
+//        return accounts.stream()
+//                .map(AccountMapper::toEntity)
+//                .collect(Collectors.toList());
+//    }
 
-        return null;
+    public static List<Account> toAccount(List<AccountDTO> accountsDTO) {
+        return accountsDTO.stream()
+                .map(AccountMapper::toAccount)
+                .collect(Collectors.toList());
     }
-
-    public static List<AccountEntity> toEntities(List<Account> account) {
-        // Call the toEntity method with a java 8 stream
-        return null;
-    }
-
-    public static List<Account> toAccount(List<AccountDTO> accountDTO) {
-        // call the toAccount method with a java 8 stream;
-        return null;
-    }
-
 
 }

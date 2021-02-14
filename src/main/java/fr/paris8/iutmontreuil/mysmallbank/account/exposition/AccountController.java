@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -24,38 +25,30 @@ public class AccountController {
 
     @GetMapping
     public List<AccountDTO> listAllAccounts() {
-        List<Account> accounts = accountService.listAllAccount();
-        return AccountMapper.toDTOs(accounts);
+        return AccountMapper.toDTOs(accountService.listAllAccount());
     }
 
-    /* TODO
-    @GetMapping("TODO : what path ?")
+    @GetMapping("/{account-uid}")
     public AccountDTO getAccount(@PathVariable("account-uid") String accountUid) {
-        return null;
+        return AccountMapper.toDTO(accountService.getAccount(accountUid));
     }
-    */
 
     @PostMapping
     public ResponseEntity<AccountDTO> createAccount(@RequestBody AccountDTO accountDTO) throws URISyntaxException {
-        // TODO
-        /*
-            Transform the AccountDTO to Account object with the AccountMapper and call the right of the service
-         */
-
-        // return ResponseEntity.created(new URI("/accounts/" + createdAccount.getUid())).build();
-        return null;
+        Account createdAccount = accountService.createAccount(AccountMapper.toAccount(accountDTO));
+        return ResponseEntity.created(new URI("/accounts/" + createdAccount.getUid())).body(AccountMapper.toDTO(createdAccount));
     }
 
     @PostMapping("/batch")
-    public List<AccountDTO> createAccount(@RequestBody List<AccountDTO> accountDTO) {
-        List<Account> account = AccountMapper.toAccount(accountDTO);
-        List<Account> createdAccount = accountService.createAccounts(account);
-        return AccountMapper.toDTOs(createdAccount);
+    public List<AccountDTO> createAccounts(@RequestBody List<AccountDTO> accountDTO) {
+        List<Account> createdAccounts = accountService.createAccounts(AccountMapper.toAccount(accountDTO));
+        return AccountMapper.toDTOs(createdAccounts);
     }
 
-    @DeleteMapping(/* TODO */)
-    public void deleteAccount() {
-        // TODO
+    @DeleteMapping("/{account-uid}")
+    public AccountDTO deleteAccount(@PathVariable("account-uid") String accountUid, @RequestBody AccountDTO accountDTO) {
+        Account deletedAccount = accountService.delete(accountUid, AccountMapper.toAccount(accountDTO));
+        return AccountMapper.toDTO(deletedAccount);
     }
 
 }

@@ -1,4 +1,4 @@
-package fr.paris8.iutmontreuil.mysmallbank.transfer;
+package fr.paris8.iutmontreuil.mysmallbank.transfer.exposition.dto;
 
 import fr.paris8.iutmontreuil.mysmallbank.account.exposition.dto.AccountDTO;
 

@@ -5,6 +5,7 @@ import fr.paris8.iutmontreuil.mysmallbank.account.domain.model.Holder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class HolderRepository {
@@ -16,19 +17,24 @@ public class HolderRepository {
     }
 
     public Holder getHolder(String id) {
-        HolderEntity holder = holderDAO.getOne(id);
-        return HolderMapper.toHolder(holder);
+        return HolderMapper.toHolder(holderDAO.getOne(id));
     }
 
-    public List<Holder> listHolders() {
-        // TODO
-        return null;
+    public List<Holder> listAllHolders() {
+        return holderDAO.findAll().stream()
+                .map(HolderMapper::toHolder)
+                .collect(Collectors.toList());
     }
 
-    public Holder create(Holder holder) {
+    public Holder save(Holder holder) {
         HolderEntity entityToSave = HolderMapper.toEntity(holder);
-        HolderEntity createdHolder = holderDAO.save(entityToSave);
-        return HolderMapper.toHolder(createdHolder);
+        return HolderMapper.toHolder(holderDAO.save(entityToSave));
     }
 
+    public Holder delete(Holder holder) {
+        HolderEntity entityToDelete = HolderMapper.toEntity(holder);
+        Holder deletedHolder = HolderMapper.toHolder(entityToDelete);
+        holderDAO.delete(entityToDelete);
+        return deletedHolder;
+    }
 }

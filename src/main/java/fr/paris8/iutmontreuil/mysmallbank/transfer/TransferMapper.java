@@ -2,10 +2,11 @@ package fr.paris8.iutmontreuil.mysmallbank.transfer;
 
 import fr.paris8.iutmontreuil.mysmallbank.account.domain.model.Account;
 import fr.paris8.iutmontreuil.mysmallbank.account.domain.model.Holder;
-import fr.paris8.iutmontreuil.mysmallbank.account.exposition.dto.AccountDTO;
 import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.AccountEntity;
 import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.HolderEntity;
-import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.TransferEntity;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.infrastructure.TransferEntity;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.domain.model.Transfer;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.exposition.dto.TransferDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,6 +85,12 @@ public class TransferMapper {
     public static List<TransferDTO> toDTOs(List<Transfer> transfers) {
         return transfers.stream()
                 .map(TransferMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Transfer> toTransfers(List<TransferEntity> transferEntities) {
+        return transferEntities.stream()
+                .map(TransferMapper::toTransfer)
                 .collect(Collectors.toList());
     }
 }

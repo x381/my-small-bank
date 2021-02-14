@@ -1,5 +1,6 @@
-package fr.paris8.iutmontreuil.mysmallbank.account.infrastructure;
+package fr.paris8.iutmontreuil.mysmallbank.transfer.infrastructure;
 
+import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.AccountEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

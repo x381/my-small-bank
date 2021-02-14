@@ -1,8 +1,12 @@
-package fr.paris8.iutmontreuil.mysmallbank.transfer;
+package fr.paris8.iutmontreuil.mysmallbank.transfer.domain;
 
 import fr.paris8.iutmontreuil.mysmallbank.account.domain.model.Account;
 import fr.paris8.iutmontreuil.mysmallbank.common.ValidationError;
 import fr.paris8.iutmontreuil.mysmallbank.common.exception.ValidationErrorException;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.domain.model.Order;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.infrastructure.TransferRepository;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.domain.model.Transfer;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +21,14 @@ public class TransferService {
         this.transferRepository = transferRepository;
     }
 
+    public List<Transfer> listAllTransfers(Order order) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "executionDate");
+        if(order.equals(Order.DESC))
+            sort = Sort.by(Sort.Direction.DESC,"executionDate");
+
+        return transferRepository.listAllTransfers(sort);
+    }
+
     public Transfer createTransfer(Transfer transfer) {
         List<ValidationError> validationErrors = validateTransfer(transfer);
         if (!validationErrors.isEmpty())
@@ -24,7 +36,7 @@ public class TransferService {
         else {
             Account sender = transferRepository.getAccount(transfer.getAccountIdFrom());
             Account receiver = transferRepository.getAccount(transfer.getAccountIdTo());
-            transferRepository.saveAccountFromTransfer(sender.updateBalance(sender.getBalance() - transfer.getAmount()), receiver.updateBalance(receiver.getBalance() + transfer.getAmount()));
+            transferRepository.saveAccountsFromTransfer(sender.updateBalance(sender.getBalance() - transfer.getAmount()), receiver.updateBalance(receiver.getBalance() + transfer.getAmount()));
         }
 
         return transferRepository.save(transfer);

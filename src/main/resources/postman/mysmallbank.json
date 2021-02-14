@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bc0d8717-d86a-4238-9856-7c6f20d3b8ae",
+		"_postman_id": "db3edc1e-f77f-4fe3-93cf-2e87a49aef70",
 		"name": "MySmallBank",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"holder\": {\n        \"id\": \"92e2fe3a-d755-4f89-ba7a-db82350b34d8\"\n    },\n    \"type\": \"PEL\",\n    \"balance\": 350\n}",
+							"raw": "{\n    \"holder\": {\n        \"id\": \"87199cce-a800-42cb-b002-fa059c8e331e\"\n    },\n    \"type\": \"SAVINGS\",\n    \"balance\": 5000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,12 +23,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/accounts",
-							"protocol": "http",
+							"raw": "{{base_url}}/accounts",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
 								"accounts"
 							]
@@ -43,7 +41,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"holder\": {\n            \"id\": \"38aeaf16-25a6-4d49-9f19-73d15c6e7761\"\n        },\n        \"type\": \"TRANSACTION\",\n        \"balance\": 100\n    },\n    {\n        \"holder\": {\n            \"id\": \"38aeaf16-25a6-4d49-9f19-73d15c6e7761\"\n        },\n        \"type\": \"SAVINGS\",\n        \"balance\": 1000\n    },\n    {\n        \"holder\": {\n            \"id\": \"38aeaf16-25a6-4d49-9f19-73d15c6e7761\"\n        },\n        \"type\": \"PEL\",\n        \"balance\": 8888\n    }\n]",
+							"raw": "[\n    {\n        \"holder\": {\n            \"id\": \"b2636304-9b6e-4cc7-87fd-7073eda2adaa\"\n        },\n        \"type\": \"TRANSACTION\",\n        \"balance\": 100\n    },\n    {\n        \"holder\": {\n            \"id\": \"b2636304-9b6e-4cc7-87fd-7073eda2adaa\"\n        },\n        \"type\": \"SAVINGS\",\n        \"balance\": 1000\n    },\n    {\n        \"holder\": {\n            \"id\": \"b2636304-9b6e-4cc7-87fd-7073eda2adaa\"\n        },\n        \"type\": \"PEL\",\n        \"balance\": 8888\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,12 +49,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/accounts/batch",
-							"protocol": "http",
+							"raw": "{{base_url}}/accounts/batch",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
 								"accounts",
 								"batch"
@@ -66,17 +62,15 @@
 					"response": []
 				},
 				{
-					"name": "Get all Accounts",
+					"name": "Get all accounts",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/accounts",
-							"protocol": "http",
+							"raw": "{{base_url}}/accounts",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
 								"accounts"
 							]
@@ -90,13 +84,54 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/accounts/12e61975-3220-4dbd-a032-e73ef93f2765",
+							"raw": "{{base_url}}/accounts/:id",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"accounts",
-								"12e61975-3220-4dbd-a032-e73ef93f2765"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uid\": \"10b91bd9-d8dd-4950-bf9a-155f63ef6d3d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/accounts/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "dd4e5378-6af6-4e64-9ab8-6f3673ccacf4",
+									"type": "string"
+								}
 							]
 						}
 					},
@@ -114,7 +149,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"from\": \"5bbe178f-5309-4e82-8036-8c5e50f9b533\",\n    \"to\": \"83eddbff-b8f1-409d-b87c-93a76089ad33\",\n    \"amount\": 250\n}",
+							"raw": "{\n    \"from\": \"2d7a1faa-4373-4b46-a908-a8cbba3c00b6\",\n    \"to\": \"81007389-adca-44e1-829d-ad3f8c854df8\",\n    \"amount\": 4567\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -128,6 +163,29 @@
 							],
 							"path": [
 								"transfers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all transfers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/transfers?sort=ASC",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"transfers"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "ASC"
+								}
 							]
 						}
 					},
@@ -161,13 +219,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/holders/59e7a3bb-c3c6-4c24-99b9-f0abe668f03d",
+							"raw": "{{base_url}}/holders/:id",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"holders",
-								"59e7a3bb-c3c6-4c24-99b9-f0abe668f03d"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "string"
+								}
 							]
 						}
 					},
@@ -194,6 +259,100 @@
 							],
 							"path": [
 								"holders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update holder address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\" : \"40 avenue de la nouvelle France\",\r\n    \"zipCode\": \"93110\",\r\n    \"city\": \"\",\r\n    \"country\": \"CHINE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/holders/:id/address",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"holders",
+								":id",
+								"address"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4dbf5aaa-9ff9-4ec0-8009-51b60741847a",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update holder",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jean\",\r\n    \"lastName\": \"MOULIN\",\r\n    \"birthDate\": \"2001-08-03\",\r\n    \"address\": {\r\n        \"street\" : \"45 avenue de la nouvelle France\",\r\n        \"zipCode\": \"93110\",\r\n        \"city\": \"Montreuil\",\r\n        \"country\": \"FRANCE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/holders/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"holders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b2636304-9b6e-4cc7-87fd-7073eda2adaa",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete holder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/holders/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"holders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "string"
+								}
 							]
 						}
 					},

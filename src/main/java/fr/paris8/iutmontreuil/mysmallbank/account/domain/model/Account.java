@@ -15,6 +15,10 @@ public class Account {
         this.balance = balance;
     }
 
+    public Account updateBalance(double balance) {
+        return new Account(this.uid, this.holder, this.type, balance);
+    }
+
     public String getUid() {
         return uid;
     }

@@ -1,5 +1,10 @@
-package fr.paris8.iutmontreuil.mysmallbank.transfer;
+package fr.paris8.iutmontreuil.mysmallbank.transfer.exposition;
 
+import fr.paris8.iutmontreuil.mysmallbank.transfer.TransferMapper;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.domain.TransferService;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.domain.model.Order;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.domain.model.Transfer;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.exposition.dto.TransferDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +24,9 @@ public class TransferController {
         this.transferService = transferService;
     }
 
-    @GetMapping("/transfers")
-    public List<TransferDTO> getTransfers(@RequestParam(name = "tri") String tri) {
-        return TransferMapper.toD
+    @GetMapping
+    public List<TransferDTO> listAllTransfers(@RequestParam(name = "sort") Order order) {
+        return TransferMapper.toDTOs(transferService.listAllTransfers(order));
     }
 
     @PostMapping

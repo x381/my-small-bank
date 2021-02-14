@@ -14,6 +14,27 @@ public class Address {
         this.country = country;
     }
 
+    public Address merge(Address address) {
+        String street = this.street;
+        String zipCode = this.zipCode;
+        String city = this.city;
+        String country = this.country;
+
+        if(address.street != null && !address.street.isEmpty())
+            street = address.street;
+
+        if(address.zipCode != null && !address.zipCode.isEmpty())
+            zipCode = address.zipCode;
+
+        if(address.city != null && !address.city.isEmpty())
+            city = address.city;
+
+        if(address.country != null && !address.country.isEmpty())
+            country = address.country;
+
+        return new Address(street, zipCode, city, country);
+    }
+
     public String getStreet() {
         return street;
     }

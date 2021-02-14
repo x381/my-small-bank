@@ -1,12 +1,14 @@
-package fr.paris8.iutmontreuil.mysmallbank.transfer;
+package fr.paris8.iutmontreuil.mysmallbank.transfer.infrastructure;
 
-import fr.paris8.iutmontreuil.mysmallbank.account.AccountMapper;
 import fr.paris8.iutmontreuil.mysmallbank.account.domain.model.Account;
 import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.AccountDAO;
 import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.AccountEntity;
-import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.TransferDAO;
-import fr.paris8.iutmontreuil.mysmallbank.account.infrastructure.TransferEntity;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.TransferMapper;
+import fr.paris8.iutmontreuil.mysmallbank.transfer.domain.model.Transfer;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class TransferRepository {
@@ -17,6 +19,10 @@ public class TransferRepository {
     public TransferRepository(TransferDAO transferDAO, AccountDAO accountDAO) {
         this.transferDAO = transferDAO;
         this.accountDAO = accountDAO;
+    }
+
+    public List<Transfer> listAllTransfers(Sort sort) {
+        return TransferMapper.toTransfers(transferDAO.findAll(sort));
     }
 
     public Account getAccount(String id) {
@@ -32,9 +38,9 @@ public class TransferRepository {
         return TransferMapper.toTransfer(transferDAO.save(entityToSave));
     }
 
-    public void saveAccountFromTransfer(Account sender, Account receiver) {
-        AccountEntity entityToSave1 = TransferMapper.toAccountEntity(sender);
-        AccountEntity entityToSave2 = TransferMapper.toAccountEntity(receiver);
+    public void saveAccountsFromTransfer(Account accountFrom, Account accountTo) {
+        AccountEntity entityToSave1 = TransferMapper.toAccountEntity(accountFrom);
+        AccountEntity entityToSave2 = TransferMapper.toAccountEntity(accountTo);
         accountDAO.save(entityToSave1);
         accountDAO.save(entityToSave2);
     }

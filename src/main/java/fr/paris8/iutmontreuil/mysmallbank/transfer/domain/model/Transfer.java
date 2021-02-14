@@ -1,4 +1,4 @@
-package fr.paris8.iutmontreuil.mysmallbank.transfer;
+package fr.paris8.iutmontreuil.mysmallbank.transfer.domain.model;
 
 import java.time.LocalDateTime;
 
