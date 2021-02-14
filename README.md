@@ -1,12 +1,6 @@
 # My small bank
-### Base project
-.  
-.  
-.  
+
+Groupe : Arthur ZHU - Simon ZOU
 
 ## DUT Informatique 2A
 ### IUT de Montreuil
-
-
-"# my-small-bank" 
-"# my-small-bank" 
